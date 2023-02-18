@@ -1,6 +1,6 @@
 package com.kremlevmax.GameApp.game;
 
-public class MarioGame {
+public class MarioGame implements ConsoleGame {
 	public void up() {
 		System.out.println("Jump");
 	}

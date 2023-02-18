@@ -2,16 +2,16 @@ package com.kremlevmax.GameApp.game;
 
 public class GameRunner {
 	
-	MarioGame marioGame;
+	ConsoleGame consoleGame;
 
-	public GameRunner(MarioGame marioGame) {
-		this.marioGame = marioGame;
+	public GameRunner(ConsoleGame consoleGame) {
+		this.consoleGame = consoleGame;
 	}	
 	
 	public void run() {
-		marioGame.up();
-		marioGame.down();
-		marioGame.left();
-		marioGame.right();
+		consoleGame.up();
+		consoleGame.down();
+		consoleGame.left();
+		consoleGame.right();
 	}
 }
