@@ -1,5 +1,10 @@
 package com.kremlevmax.GameApp.game;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+@Qualifier("ContraGame")
 public class ContraGame implements ConsoleGame {
 
 	@Override
