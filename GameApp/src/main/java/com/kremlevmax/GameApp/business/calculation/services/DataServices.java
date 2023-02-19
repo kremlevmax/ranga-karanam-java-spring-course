@@ -1,8 +1,7 @@
 package com.kremlevmax.GameApp.business.calculation.services;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
 public interface DataServices {
 	int[] retrieveData();
 }
