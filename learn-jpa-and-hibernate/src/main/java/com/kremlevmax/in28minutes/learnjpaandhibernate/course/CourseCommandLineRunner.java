@@ -8,20 +8,21 @@ import org.springframework.stereotype.Component;
 import com.kremlevmax.in28minutes.learnjpaandhibernate.course.Course;
 import com.kremlevmax.in28minutes.learnjpaandhibernate.course.jdbc.CourseJDBCTemplate;
 import com.kremlevmax.in28minutes.learnjpaandhibernate.course.jpa.CourseJPATemplate;
+import com.kremlevmax.in28minutes.learnjpaandhibernate.course.spring.data.jpa.CourseSpringDataJPARepository;
 
 @Component
 public class CourseCommandLineRunner implements CommandLineRunner {
 
 	@Autowired
-	CourseJPATemplate courseJPATemplate;
+	CourseSpringDataJPARepository courseSpringDataJPARepository;
 	
-	@Override
 	public void run(String... args) throws Exception {
-		courseJPATemplate.insertData(new Course(1, "Learn AWS!", "in28minutes"));
-		courseJPATemplate.insertData(new Course(2, "Learn Java!", "in28minutes"));
-		courseJPATemplate.insertData(new Course(3, "Learn Python!", "in28minutes"));
-		courseJPATemplate.deleteData(3);
-		System.out.println(courseJPATemplate.getDataById(1));
+		courseSpringDataJPARepository.save(new Course(1, "Learn AWS!", "in28minutes"));
+		courseSpringDataJPARepository.save(new Course(2, "Learn Java!", "in28minutes"));
+		courseSpringDataJPARepository.save(new Course(3, "Learn Python!", "in28minutes"));
+		courseSpringDataJPARepository.deleteById(3l);
+		System.out.println(courseSpringDataJPARepository.findById(1l));
+
 	}
 
 }
