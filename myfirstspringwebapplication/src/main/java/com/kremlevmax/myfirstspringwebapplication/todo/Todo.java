@@ -50,7 +50,7 @@ public class Todo {
 		this.dueDate = dueDate;
 	}
 
-	public boolean isDone() {
+	public boolean getIsDone() {
 		return isDone;
 	}
 

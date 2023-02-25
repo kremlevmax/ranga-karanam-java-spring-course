@@ -12,7 +12,7 @@ public class TodoService {
 	
 	static {
 		todoList.add(new Todo(1, "in28minutes", "learn AWS", LocalDate.now().plusMonths(1l), false));
-		todoList.add(new Todo(1, "in28minutes", "learn AWS", LocalDate.now().plusMonths(1l), false));
+		todoList.add(new Todo(2, "in28minutes", "learn Java", LocalDate.now().plusMonths(1l), false));
 	}
 	
 	public List<Todo> findTodosByUsername(String username) {
