@@ -47,14 +47,32 @@ public class TodoController {
 			System.out.println(result.getAllErrors());
 			return "add-todo";
 		}
+		
 		String authorString = (String) model.get("username");
 		todoService.addToDo(authorString, todo.getDescription(), todo.getDueDate());
 		return "redirect:todos";	
 	}
 	
 	@GetMapping("/delete-todo")
-	public String  deleteTodo(@RequestParam int id) {
+	public String deleteTodo(@RequestParam int id) {
 		todoService.removeTodo(id);
+		return "redirect:todos";	
+	}
+	
+	@GetMapping("/update-todo")
+	public String showUpdateTodoForm(ModelMap model, @RequestParam int id) {
+		Todo todo = todoService.getTodoById(id);
+		model.addAttribute("todo", todo);
+		return "add-todo";
+	}
+	
+	@PostMapping("/update-todo")
+	public String updateTodo(@RequestParam int id, @Valid Todo todo, BindingResult result) {
+		if (result.hasErrors()) {
+			System.out.println(result.getAllErrors());
+			return "add-todo";
+		}
+		todoService.updateTodo(id, todo);
 		return "redirect:todos";	
 	}
 }

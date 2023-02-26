@@ -19,6 +19,7 @@
 					<th>Due Date</th>
 					<th>Complete</th>
 					<th></th>
+					<th></th>
 				</tr>
 				
 				<c:forEach items = "${todos}" var="todo">
@@ -28,6 +29,7 @@
 						<td>${todo.dueDate}</td>
 						<td>${todo.isDone}</td>
 						<td><a href="/delete-todo?id=${todo.id}" class="btn btn-warning">Remove</a></td>
+						<td><a href="/update-todo?id=${todo.id}" class="btn btn-info">Update</a></td>
 					</tr>
 				</c:forEach>
 			</table>
