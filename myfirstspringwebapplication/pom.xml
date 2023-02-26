@@ -61,6 +61,11 @@
 			<artifactId>jquery</artifactId>
 			<version>3.6.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.kremlev-max.in-28-minutes</groupId>
+			<artifactId>learn-jpa-and-hibernate</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

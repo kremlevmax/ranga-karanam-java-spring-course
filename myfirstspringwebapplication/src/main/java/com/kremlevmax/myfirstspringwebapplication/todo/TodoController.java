@@ -36,16 +36,20 @@ public class TodoController {
 	@GetMapping("/add-todo")
 	public String goAddTodoPage(ModelMap model) {
 		String username = (String)model.get("username");
-		Todo todo = new Todo(0, username, "", LocalDate.now(), false);
+		Todo todo = new Todo(1, username, "", LocalDate.now(), false);
 		model.put("todo", todo);
 		return "add-todo";
 	}
 	
 	@PostMapping("/add-todo")
 	public String createTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+		if (result.hasErrors()) {
+			System.out.println(result.getAllErrors());
+			return "add-todo";
+		}
 		String authorString = (String) model.get("username");
 		todoService.addToDo(authorString, todo.getDescription(), todo.getDueDate());
-		return "redirect:todos";
+		return "redirect:todos";	
 	}
 	
 	@GetMapping("/delete-todo")

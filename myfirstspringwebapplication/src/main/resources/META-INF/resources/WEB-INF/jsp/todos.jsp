@@ -18,7 +18,7 @@
 					<th>Description</th>
 					<th>Due Date</th>
 					<th>Complete</th>
-					<th>Delete</th>
+					<th></th>
 				</tr>
 				
 				<c:forEach items = "${todos}" var="todo">

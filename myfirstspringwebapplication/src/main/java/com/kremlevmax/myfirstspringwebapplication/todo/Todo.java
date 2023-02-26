@@ -2,10 +2,17 @@ package com.kremlevmax.myfirstspringwebapplication.todo;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class Todo {
 	private int id;
 	private String username;
+	
+	@Size(min=10, message="Enter at least 10 characters")
 	private String description;
+	
+	@NotNull(message = "Todo must have a due date")
 	private LocalDate dueDate;
 	private boolean isDone;
 	
