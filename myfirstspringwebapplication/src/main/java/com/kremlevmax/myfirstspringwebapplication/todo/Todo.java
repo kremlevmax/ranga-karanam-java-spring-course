@@ -2,11 +2,16 @@ package com.kremlevmax.myfirstspringwebapplication.todo;
 
 import java.time.LocalDate;
 
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Todo {
+	@Id
+	@GeneratedValue
 	private int id;
 	private String username;
 	
@@ -16,6 +21,9 @@ public class Todo {
 	@NotNull(message = "Todo must have a due date")
 	private LocalDate dueDate;
 	private boolean isDone;
+	
+	public Todo() {
+	}	
 	
 	public Todo(int id, String username, String description, LocalDate dueDate, boolean isDone) {
 		super();
