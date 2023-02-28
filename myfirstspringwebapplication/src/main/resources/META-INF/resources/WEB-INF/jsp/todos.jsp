@@ -4,7 +4,7 @@
 </head>
 	<body>
 		<div class="container">
-			<h1>Welcome, ${login}</h1>
+			<h1>Welcome, ${username}</h1>
 			<hr>
 			
 			<h2>Todo List:</h2>
