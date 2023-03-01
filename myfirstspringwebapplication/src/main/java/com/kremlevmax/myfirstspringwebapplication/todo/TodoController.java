@@ -21,17 +21,20 @@ import jakarta.validation.Valid;
 @SessionAttributes("username")
 public class TodoController {
 	TodoService todoService;
+	TodoJPARepository todoJPARepository;
 	
 	@Autowired
-	public TodoController(TodoService todoService) {
+	public TodoController(TodoService todoService, TodoJPARepository todoJPARepository) {
 		super();
 		this.todoService = todoService;
+		this.todoJPARepository = todoJPARepository;
 	}
 
 	@RequestMapping("/todos")
 	public String showTodos(ModelMap model) {
 		String username = getUsername();
-		List<Todo> todos = todoService.findTodosByUsername(username);
+		System.out.println(username);
+		List<Todo> todos = todoJPARepository.findByUsername(username);
 		model.addAttribute("todos", todos);
 		model.addAttribute("username", username);
 		return "todos";
@@ -40,7 +43,7 @@ public class TodoController {
 	@GetMapping("/add-todo")
 	public String goAddTodoPage(ModelMap model) {
 		String username = getUsername();
-		Todo todo = new Todo(1, username, "", LocalDate.now(), false);
+		Todo todo = new Todo(0, username, "", LocalDate.now(), false);
 		model.put("todo", todo);
 		return "add-todo";
 	}
@@ -48,24 +51,24 @@ public class TodoController {
 	@PostMapping("/add-todo")
 	public String createTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
 		if (result.hasErrors()) {
-			System.out.println(result.getAllErrors());
 			return "add-todo";
+		} else {
+			String username = getUsername();
+			todo.setUsername(username);
+			todoJPARepository.save(todo);
 		}
-		
-		String username = getUsername();
-		todoService.addToDo(username, todo.getDescription(), todo.getDueDate());
 		return "redirect:todos";	
 	}
 	
 	@GetMapping("/delete-todo")
 	public String deleteTodo(@RequestParam int id) {
-		todoService.removeTodo(id);
+		todoJPARepository.deleteById(id);
 		return "redirect:todos";	
 	}
 	
 	@GetMapping("/update-todo")
 	public String showUpdateTodoForm(ModelMap model, @RequestParam int id) {
-		Todo todo = todoService.getTodoById(id);
+		Todo todo = todoJPARepository.getReferenceById(id);
 		model.addAttribute("todo", todo);
 		return "add-todo";
 	}
@@ -76,7 +79,10 @@ public class TodoController {
 			System.out.println(result.getAllErrors());
 			return "add-todo";
 		}
-		todoService.updateTodo(id, todo);
+		
+		String username = getUsername();
+		todo.setUsername(username);
+		todoJPARepository.save(todo);
 		return "redirect:todos";	
 	}
 	
